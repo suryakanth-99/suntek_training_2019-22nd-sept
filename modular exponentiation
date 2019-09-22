@@ -1,0 +1,31 @@
+#include <stdio.h> 
+
+int modexp(int a, int b, int c) 
+{
+	int y;
+	if (a == 0) 
+		return 0; 
+	if (b == 0) 
+		return 1;
+	if (b % 2 == 0) 
+	{ 
+		y = modexp(a, b/2, c); 
+		y = (y * y) % c; 
+	} 
+	else 
+	{ 
+		y = a % c; 
+		y = (y * modexp(a, b - 1, c) % c) % c; 
+	} 
+
+	return (int)((y + c) % c); 
+} 
+
+int main() 
+{ 
+int a,b,c,x;
+scanf("%d %d %d",&a,&b,&c); 
+x=modexp(a,b,c);
+printf("%d",x); 
+return 0; 
+} 
